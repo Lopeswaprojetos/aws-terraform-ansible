@@ -39,7 +39,7 @@ Instalação do Terraform: https://www.terraform.io/downloads.html
 
 ## Clone o Repositório
 
-git clone https://github.com/your-username/aws-terraform-ansible.git
+git clone https://github.com/Lopeswaprojetos/aws-terraform-ansible.git
 cd aws-terraform-ansible
 
 ## Infraestrutura Provisória com Terraform
