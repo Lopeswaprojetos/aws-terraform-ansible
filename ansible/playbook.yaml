@@ -1,0 +1,44 @@
+---
+- name: Configurar servidores Apache e Nginx
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Instalar Apache no servidor Apache
+      yum:
+        name: httpd
+        state: present
+      when: "'apache_server' in group_names"
+
+    - name: Iniciar e habilitar o Apache
+      systemd:
+        name: httpd
+        enabled: true
+        state: started
+      when: "'apache_server' in group_names"
+
+    - name: Configurar página de boas-vindas do Apache
+      copy:
+        dest: /var/www/html/index.html
+        content: "<html><h1>Bem-vindo ao servidor Apache!</h1></html>"
+      when: "'apache_server' in group_names"
+
+    - name: Instalar Nginx no servidor Nginx
+      yum:
+        name: nginx
+        state: present
+      when: "'nginx_server' in group_names"
+
+    - name: Iniciar e habilitar o Nginx
+      systemd:
+        name: nginx
+        enabled: true
+        state: started
+      when: "'nginx_server' in group_names"
+
+    - name: Configurar página de boas-vindas do Nginx
+      copy:
+        dest: /usr/share/nginx/html/index.html
+        content: "<html><h1>Bem-vindo ao servidor Nginx!</h1></html>"
+      when: "'nginx_server' in group_names"
+
